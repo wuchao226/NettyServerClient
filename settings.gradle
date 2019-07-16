@@ -1,1 +1,1 @@
-include ':client', ':server', ':ExchangePojo'
+include ':client', ':server'
