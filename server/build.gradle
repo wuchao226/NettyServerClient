@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+
+    defaultConfig {
+        applicationId "com.wuc.server"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Anko Commons
+    implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    implementation files('libs/netty-all-4.1.37.Final.jar')
+    def dependencies = rootProject.ext.dependencies
+    //Android Support
+    implementation dependencies.appcompat
+    implementation dependencies.core_ktx
+    implementation dependencies.constraintLayout
+    implementation dependencies.material
+    //multidex
+    implementation dependencies.multidex
+    //implementation project(path: ':ExchangePojo')
+    implementation files('libs/Exchange-pojo.jar')
+}
